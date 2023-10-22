@@ -5,7 +5,7 @@
         "storage-name": {
            "type": "string",
            "metadata": {
-                "description": "Enter your storage account name below!"
+                "description": "Enter the storage account name here!"
             }
         }
     },
