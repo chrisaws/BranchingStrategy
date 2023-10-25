@@ -7,6 +7,18 @@
            "metadata": {
                 "description": "Enter the storage account name here!"
             }
+        },
+        "name-webapp": {
+            "type": "string",
+            "metadata": {
+                "description": "name your web app"
+            }
+        },
+        "Name-ASP": {
+            "type": "string",
+            "metadata": {
+                "description": "name your App service plan"
+            }
         }
     },
     "variables": {},
@@ -27,7 +39,7 @@
             }
         },
         {
-            "name": "webApp1",
+            "name": "[parameters('name-webapp')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-09-01",
             "location": "[resourceGroup().location]",
@@ -39,10 +51,26 @@
                 "[resourceId('Microsoft.Web/serverfarms', 'appServicePlan1')]"
             ],
             "properties": {
-                "name": "webApp1",
+                "name": "[parameters('name-webapp')]",
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'appServicePlan1')]"
             }
+        },
+        {
+            "name": "[parameters('Name-ASP')]",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2022-09-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "[parameters('Name-ASP')]"
+            },
+            "properties": {
+                "name": "[parameters('Name-ASP')]"
+            }
         }
-    ],
-    "outputs": {}
+    ]
+
 }
